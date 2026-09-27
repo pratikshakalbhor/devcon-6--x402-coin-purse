@@ -1,0 +1,424 @@
+{
+  "generatedAt": "2026-09-27T10:49:43.660Z",
+  "mode": "scripted",
+  "model": "scripted (no Anthropic SDK call)",
+  "facilitatorKey": "configured (unfunded in this run)",
+  "question": "Does this week's rainfall forecast predict a mandi tomato price move?",
+  "policy": {
+    "perCallMaxBaseUnits": "50000",
+    "perCallMaxFormatted": "0.05 USDC",
+    "totalBudgetBaseUnits": "5000000",
+    "totalBudgetFormatted": "5 USDC",
+    "allowedNetworks": [
+      "eip155:84532"
+    ],
+    "allowedAssets": [
+      "0x036cbd53842c5426634e7929541ec2318f3dcf7e"
+    ]
+  },
+  "runs": [
+    {
+      "name": "honest-only",
+      "includeRogue": false,
+      "question": "Does this week's rainfall forecast predict a mandi tomato price move?",
+      "sources": [
+        "http://127.0.0.1:54642/preview",
+        "http://127.0.0.1:54642/forecast"
+      ],
+      "summary": "Rainfall and mandi tomato prices: the forecast endpoint I could reach provides gas and USDC liquidity data, not rainfall, so it does not support a claim about tomato prices. Several other candidate sources were refused by the operator policy and cost nothing. I have no verified rainfall-to-price evidence from these endpoints.",
+      "stoppedBecause": "final_answer",
+      "turns": 3,
+      "fetches": [
+        {
+          "url": "http://127.0.0.1:54642/preview",
+          "paid": false,
+          "refusalCode": null,
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54642/forecast",
+          "paid": true,
+          "refusalCode": null,
+          "spentBaseUnits": "10000",
+          "spentFormatted": "0.01 USDC"
+        }
+      ],
+      "ledgerRows": [
+        {
+          "id": 1,
+          "ts": "2026-09-27T10:49:41.147Z",
+          "url": "http://127.0.0.1:54642/forecast",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "paid",
+          "reason": "within policy: 10000 <= per-call 50000; projected 10000 <= budget 5000000",
+          "txHash": "0xe51f0d2ad90093b626bb7204838b67789bfc62496ed34c9e82b83144b8ff2c13"
+        }
+      ],
+      "totals": {
+        "cumulativeSpentBaseUnits": "10000",
+        "cumulativeSpentFormatted": "0.01 USDC",
+        "paidCount": 1,
+        "refusedCount": 0,
+        "withinBudget": true
+      }
+    },
+    {
+      "name": "honest-and-rogue",
+      "includeRogue": true,
+      "question": "Does this week's rainfall forecast predict a mandi tomato price move?",
+      "sources": [
+        "http://127.0.0.1:54642/preview",
+        "http://127.0.0.1:54642/forecast",
+        "http://127.0.0.1:54643/free",
+        "http://127.0.0.1:54643/overpriced",
+        "http://127.0.0.1:54643/raise-budget",
+        "http://127.0.0.1:54643/wrong-network",
+        "http://127.0.0.1:54643/wrong-asset",
+        "http://127.0.0.1:54643/decimal-amount",
+        "http://127.0.0.1:54643/cheap-then-ruinous",
+        "http://127.0.0.1:54643/ruinous-then-cheap",
+        "http://127.0.0.1:54643/upto-scheme"
+      ],
+      "summary": "Rainfall and mandi tomato prices: the forecast endpoint I could reach provides gas and USDC liquidity data, not rainfall, so it does not support a claim about tomato prices. Several other candidate sources were refused by the operator policy and cost nothing. I have no verified rainfall-to-price evidence from these endpoints.",
+      "stoppedBecause": "final_answer",
+      "turns": 12,
+      "fetches": [
+        {
+          "url": "http://127.0.0.1:54642/preview",
+          "paid": false,
+          "refusalCode": null,
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54642/forecast",
+          "paid": false,
+          "refusalCode": "payment_failed",
+          "spentBaseUnits": "10000",
+          "spentFormatted": "0.01 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/free",
+          "paid": false,
+          "refusalCode": null,
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/overpriced",
+          "paid": false,
+          "refusalCode": "over_per_call_max",
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/raise-budget",
+          "paid": false,
+          "refusalCode": "over_per_call_max",
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/wrong-network",
+          "paid": false,
+          "refusalCode": "network_not_allowed",
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/wrong-asset",
+          "paid": false,
+          "refusalCode": "asset_not_allowed",
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/decimal-amount",
+          "paid": false,
+          "refusalCode": "malformed_quote",
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/cheap-then-ruinous",
+          "paid": false,
+          "refusalCode": "payment_failed",
+          "spentBaseUnits": "10000",
+          "spentFormatted": "0.01 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/ruinous-then-cheap",
+          "paid": false,
+          "refusalCode": "payment_failed",
+          "spentBaseUnits": "10000",
+          "spentFormatted": "0.01 USDC"
+        },
+        {
+          "url": "http://127.0.0.1:54643/upto-scheme",
+          "paid": false,
+          "refusalCode": "scheme_not_allowed",
+          "spentBaseUnits": "0",
+          "spentFormatted": "0 USDC"
+        }
+      ],
+      "ledgerRows": [
+        {
+          "id": 2,
+          "ts": "2026-09-27T10:49:42.637Z",
+          "url": "http://127.0.0.1:54642/forecast",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "paid",
+          "reason": "within policy: 10000 <= per-call 50000; projected 20000 <= budget 5000000",
+          "txHash": null
+        },
+        {
+          "id": 3,
+          "ts": "2026-09-27T10:49:43.597Z",
+          "url": "http://127.0.0.1:54643/overpriced",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "4990000",
+          "quotedAmountFormatted": "4.99 USDC",
+          "decision": "refused",
+          "reason": "over_per_call_max: quoted 4990000 base units exceeds PER_CALL_MAX_BASE_UNITS (50000)",
+          "txHash": null
+        },
+        {
+          "id": 4,
+          "ts": "2026-09-27T10:49:43.626Z",
+          "url": "http://127.0.0.1:54643/raise-budget",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "50000000",
+          "quotedAmountFormatted": "50 USDC",
+          "decision": "refused",
+          "reason": "over_per_call_max: quoted 50000000 base units exceeds PER_CALL_MAX_BASE_UNITS (50000)",
+          "txHash": null
+        },
+        {
+          "id": 5,
+          "ts": "2026-09-27T10:49:43.630Z",
+          "url": "http://127.0.0.1:54643/wrong-network",
+          "network": "eip155:8453",
+          "asset": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "refused",
+          "reason": "network_not_allowed: network eip155:8453 is not in ALLOWED_NETWORKS (eip155:84532)",
+          "txHash": null
+        },
+        {
+          "id": 6,
+          "ts": "2026-09-27T10:49:43.634Z",
+          "url": "http://127.0.0.1:54643/wrong-asset",
+          "network": "eip155:84532",
+          "asset": "0x1111111111111111111111111111111111111111",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "refused",
+          "reason": "asset_not_allowed: asset 0x1111111111111111111111111111111111111111 is not in ALLOWED_ASSETS (0x036cbd53842c5426634e7929541ec2318f3dcf7e)",
+          "txHash": null
+        },
+        {
+          "id": 7,
+          "ts": "2026-09-27T10:49:43.637Z",
+          "url": "http://127.0.0.1:54643/decimal-amount",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "0",
+          "quotedAmountFormatted": "0 USDC",
+          "decision": "refused",
+          "reason": "malformed_quote: quoted amount \"0.05\" is not a non-negative integer string",
+          "txHash": null
+        },
+        {
+          "id": 8,
+          "ts": "2026-09-27T10:49:43.641Z",
+          "url": "http://127.0.0.1:54643/cheap-then-ruinous",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "paid",
+          "reason": "within policy: 10000 <= per-call 50000; projected 30000 <= budget 5000000",
+          "txHash": null
+        },
+        {
+          "id": 9,
+          "ts": "2026-09-27T10:49:43.646Z",
+          "url": "http://127.0.0.1:54643/ruinous-then-cheap",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "paid",
+          "reason": "within policy: 10000 <= per-call 50000; projected 40000 <= budget 5000000",
+          "txHash": null
+        },
+        {
+          "id": 10,
+          "ts": "2026-09-27T10:49:43.654Z",
+          "url": "http://127.0.0.1:54643/upto-scheme",
+          "network": "eip155:84532",
+          "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+          "quotedAmountBaseUnits": "10000",
+          "quotedAmountFormatted": "0.01 USDC",
+          "decision": "refused",
+          "reason": "scheme_not_allowed: scheme upto is not permitted; only \"exact\" fixes the amount in advance",
+          "txHash": null
+        }
+      ],
+      "totals": {
+        "cumulativeSpentBaseUnits": "40000",
+        "cumulativeSpentFormatted": "0.04 USDC",
+        "paidCount": 4,
+        "refusedCount": 6,
+        "withinBudget": true
+      }
+    }
+  ],
+  "cumulativeAcrossRuns": {
+    "cumulativeSpentBaseUnits": "40000",
+    "cumulativeSpentFormatted": "0.04 USDC",
+    "paidCount": 4,
+    "refusedCount": 6,
+    "withinBudget": true
+  },
+  "decisions": [
+    {
+      "id": 1,
+      "ts": "2026-09-27T10:49:41.147Z",
+      "url": "http://127.0.0.1:54642/forecast",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "paid",
+      "reason": "within policy: 10000 <= per-call 50000; projected 10000 <= budget 5000000",
+      "txHash": "0xe51f0d2ad90093b626bb7204838b67789bfc62496ed34c9e82b83144b8ff2c13"
+    },
+    {
+      "id": 2,
+      "ts": "2026-09-27T10:49:42.637Z",
+      "url": "http://127.0.0.1:54642/forecast",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "paid",
+      "reason": "within policy: 10000 <= per-call 50000; projected 20000 <= budget 5000000",
+      "txHash": null
+    },
+    {
+      "id": 3,
+      "ts": "2026-09-27T10:49:43.597Z",
+      "url": "http://127.0.0.1:54643/overpriced",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "4990000",
+      "quotedAmountFormatted": "4.99 USDC",
+      "decision": "refused",
+      "reason": "over_per_call_max: quoted 4990000 base units exceeds PER_CALL_MAX_BASE_UNITS (50000)",
+      "txHash": null
+    },
+    {
+      "id": 4,
+      "ts": "2026-09-27T10:49:43.626Z",
+      "url": "http://127.0.0.1:54643/raise-budget",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "50000000",
+      "quotedAmountFormatted": "50 USDC",
+      "decision": "refused",
+      "reason": "over_per_call_max: quoted 50000000 base units exceeds PER_CALL_MAX_BASE_UNITS (50000)",
+      "txHash": null
+    },
+    {
+      "id": 5,
+      "ts": "2026-09-27T10:49:43.630Z",
+      "url": "http://127.0.0.1:54643/wrong-network",
+      "network": "eip155:8453",
+      "asset": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "refused",
+      "reason": "network_not_allowed: network eip155:8453 is not in ALLOWED_NETWORKS (eip155:84532)",
+      "txHash": null
+    },
+    {
+      "id": 6,
+      "ts": "2026-09-27T10:49:43.634Z",
+      "url": "http://127.0.0.1:54643/wrong-asset",
+      "network": "eip155:84532",
+      "asset": "0x1111111111111111111111111111111111111111",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "refused",
+      "reason": "asset_not_allowed: asset 0x1111111111111111111111111111111111111111 is not in ALLOWED_ASSETS (0x036cbd53842c5426634e7929541ec2318f3dcf7e)",
+      "txHash": null
+    },
+    {
+      "id": 7,
+      "ts": "2026-09-27T10:49:43.637Z",
+      "url": "http://127.0.0.1:54643/decimal-amount",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "0",
+      "quotedAmountFormatted": "0 USDC",
+      "decision": "refused",
+      "reason": "malformed_quote: quoted amount \"0.05\" is not a non-negative integer string",
+      "txHash": null
+    },
+    {
+      "id": 8,
+      "ts": "2026-09-27T10:49:43.641Z",
+      "url": "http://127.0.0.1:54643/cheap-then-ruinous",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "paid",
+      "reason": "within policy: 10000 <= per-call 50000; projected 30000 <= budget 5000000",
+      "txHash": null
+    },
+    {
+      "id": 9,
+      "ts": "2026-09-27T10:49:43.646Z",
+      "url": "http://127.0.0.1:54643/ruinous-then-cheap",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "paid",
+      "reason": "within policy: 10000 <= per-call 50000; projected 40000 <= budget 5000000",
+      "txHash": null
+    },
+    {
+      "id": 10,
+      "ts": "2026-09-27T10:49:43.654Z",
+      "url": "http://127.0.0.1:54643/upto-scheme",
+      "network": "eip155:84532",
+      "asset": "0x036cbd53842c5426634e7929541ec2318f3dcf7e",
+      "quotedAmountBaseUnits": "10000",
+      "quotedAmountFormatted": "0.01 USDC",
+      "decision": "refused",
+      "reason": "scheme_not_allowed: scheme upto is not permitted; only \"exact\" fixes the amount in advance",
+      "txHash": null
+    }
+  ],
+  "notes": [
+    "Produced by the scripted model. The language model is the only synthetic part: runAgent, paidFetch, guardedFetch, the sellers, HTTP, and SQLite are all real.",
+    "Two runs share one ledger, so the second run starts with the first run's spend already counted. That is the point: the budget is cumulative across processes, not per-conversation.",
+    "honest-only hit the honest stall alone. honest-and-rogue added the abusive endpoints; the refusals are the interesting rows.",
+    "A refusal is recorded only when the guard could read a price to judge. A 402 with no PAYMENT-REQUIRED header, or an empty accepts list, has no network, asset, or amount to attribute a row to, so it is reported in run.fetches but has no ledger row.",
+    "On-chain settlement is not exercised: it needs a funded Base Sepolia wallet and a live facilitator. Rows with a dispatched signature and no confirmation stay \"paid\" with a null txHash, on purpose.",
+    "The honest stall's paid /forecast WAS reached this time. Its 402 was priced within policy, a signature was dispatched, and the row stayed \"paid\" with a null txHash because settlement never confirmed — the conservative reading. It is evidence about the paid path as far as dispatch, and evidence of nothing about settlement."
+  ]
+}

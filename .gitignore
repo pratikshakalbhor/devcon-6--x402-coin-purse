@@ -1,0 +1,17 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Secrets. The wallet private key lives here and must never be committed.
+.env
+.env.local
+
+# The spend ledger is real money movement. Do not commit the live database.
+ledger/*.db
+ledger/*.db-journal
+ledger/*.db-wal
+ledger/*.db-shm
+
+# ledger/sample-run.json IS committed on purpose: it is the exported,
+# human-readable evidence of a real run.
+!ledger/sample-run.json
